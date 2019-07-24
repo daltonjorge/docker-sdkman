@@ -17,6 +17,4 @@ RUN set -x && \
 
 WORKDIR $SDKMAN_DIR
 
-#COPY docker-entrypoint.sh /
-
 ENTRYPOINT ["[[ -s \"$SDKMAN_DIR/bin/sdkman-init.sh\" ]] && source \"$SDKMAN_DIR/bin/sdkman-init.sh\" && exec \"$@\""]
