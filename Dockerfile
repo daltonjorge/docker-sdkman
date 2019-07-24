@@ -17,4 +17,8 @@ RUN set -x && \
 
 WORKDIR $SDKMAN_DIR
 
-ENTRYPOINT ["[[ -s \"$SDKMAN_DIR/bin/sdkman-init.sh\" ]] && source \"$SDKMAN_DIR/bin/sdkman-init.sh\" && exec \"$@\""]
+COPY entrypoint.sh /
+
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
