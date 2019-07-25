@@ -9,7 +9,7 @@ ENV SONAR_DIR /opt/sonarscanner
 ENV SONAR_URL https://binaries.sonarsource.com/Distribution/sonar-scanner-cli
 
 RUN apt-get update && \
-    apt-get install -y zip unzip curl && \
+    apt-get install -y ca-certificates zip unzip curl && \
     apt-get clean
 
 RUN curl -s "https://get.sdkman.io" | bash
