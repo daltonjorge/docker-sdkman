@@ -12,6 +12,12 @@ RUN apt-get update && \
     apt-get install -y ca-certificates zip unzip curl && \
     apt-get clean
 
+RUN cd /usr/share/ca-certificates && \
+    sudo mkdir letsencrypt.org && \
+    cd letsencrypt.org/ && \
+    wget "https://letsencrypt.org/certs/isrgrootx1.pem" && \
+    update-ca-certificates
+
 RUN curl -s "https://get.sdkman.io" | bash
 
 RUN mkdir $SONAR_DIR && \
