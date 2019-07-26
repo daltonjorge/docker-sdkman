@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk:latest
+FROM openjdk:8
 
 MAINTAINER Dalton Jorge <daltonjorge@gmail.com>
 
