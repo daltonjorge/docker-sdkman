@@ -12,10 +12,10 @@ RUN apt-get update && \
     apt-get install -y ca-certificates zip unzip curl && \
     apt-get clean
 
-RUN cd /usr/share/ca-certificates && \
+RUN cd /usr/local/share/ca-certificates && \
     mkdir letsencrypt.org && \
     cd letsencrypt.org/ && \
-    wget "https://letsencrypt.org/certs/isrgrootx1.pem" && \
+    wget -O letsencryptauthorityx3.crt "https://letsencrypt.org/certs/letsencryptauthorityx3.pem.txt" && \
     update-ca-certificates
 
 RUN curl -s "https://get.sdkman.io" | bash
