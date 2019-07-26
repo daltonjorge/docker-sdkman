@@ -13,7 +13,7 @@ RUN apt-get update && \
     apt-get clean
 
 RUN cd /usr/share/ca-certificates && \
-    sudo mkdir letsencrypt.org && \
+    mkdir letsencrypt.org && \
     cd letsencrypt.org/ && \
     wget "https://letsencrypt.org/certs/isrgrootx1.pem" && \
     update-ca-certificates
