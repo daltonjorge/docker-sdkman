@@ -20,7 +20,8 @@ RUN set -x && \
       zip \
       unzip \
       curl \
-      sshpass && \
+      sshpass \
+      timedatectl && \
     rm -rf /var/lib/apt/lists/*
 
 # Set certificates directory as working directory
