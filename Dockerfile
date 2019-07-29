@@ -23,18 +23,17 @@ RUN set -x && \
       sshpass && \
     rm -rf /var/lib/apt/lists/*
 
+# Set certificates directory as working directory
+WORKDIR $CERTIFICATE_DIR
+
 # Download and install Let's Encrypt root certificate
-RUN cd $CERTIFICATE_DIR && \
-    mkdir letsencrypt.org && \
+RUN mkdir letsencrypt.org && \
     cd letsencrypt.org/ && \
     wget -O $CERTIFICATE_FILE $CERTIFICATE_URL && \
     update-ca-certificates
-    
-# Download, install and set options for SDKMAN!
-RUN curl -s $SDKMAN_URL | bash && \
-    echo "sdkman_auto_answer=true" > ${SDKMAN_DIR}/etc/config && \
-    echo "sdkman_auto_selfupdate=false" >> ${SDKMAN_DIR}/etc/config && \
-    echo "sdkman_insecure_ssl=false" >> ${SDKMAN_DIR}/etc/config
+
+# Set root directory as working directory
+WORKDIR /root
 
 # Download and install sonar-scaner
 RUN mkdir $SONAR_DIR && \
@@ -45,7 +44,13 @@ RUN mkdir $SONAR_DIR && \
     chmod +x ${SONAR_APP}/bin/sonar-scanner && \
     ln -s ${SONAR_DIR}/${SONAR_APP}/bin/sonar-scanner /usr/local/bin/sonar-scanner
 
-# Set SDKMAN! install dir as working directory
+# Download, install and set options for SDKMAN!
+RUN curl -s $SDKMAN_URL | bash && \
+    echo "sdkman_auto_answer=true" > ${SDKMAN_DIR}/etc/config && \
+    echo "sdkman_auto_selfupdate=false" >> ${SDKMAN_DIR}/etc/config && \
+    echo "sdkman_insecure_ssl=false" >> ${SDKMAN_DIR}/etc/config
+
+# Set SDKMAN! installation directory as working directory
 WORKDIR $SDKMAN_DIR
 
 # Copy initialisation snippet file from docker host
